@@ -15,14 +15,14 @@ use Yii;
  * @property int $created_at
  * @property int $updated_at
  */
-class Document extends \yii\db\ActiveRecord
+class AttachDocument extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%document}}';
+        return '{{%attach_document}}';
     }
 
     /**

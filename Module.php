@@ -7,13 +7,19 @@ namespace deadly299\attachdocument;
  */
 class Module extends \yii\base\Module
 {
+    public $documentsStorePath = '@app/web/documents/store';
+    public $pictureDocumentPath = '@app/web/images';
+
     /**
      * @inheritdoc
      */
+
     public function init()
     {
         parent::init();
 
-        // custom initialization code goes here
+        if(!$this->documentsStorePath or !$this->pictureDocumentPath)
+            throw new \Exception('Setup documentsStorePath and pictureDocumentPath documents module properties');
+
     }
 }
