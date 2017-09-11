@@ -31,9 +31,9 @@ class AttachDocument extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['docs_id', 'created_at', 'updated_at'], 'integer'],
-            [['created_at', 'updated_at'], 'required'],
-            [['model', 'name', 'file_name'], 'string', 'max' => 255],
+            [['item_id', 'created_at', 'updated_at'], 'integer'],
+//            [['created_at', 'updated_at'], 'required'],
+            [['model', 'file_name', 'file_path', 'url_alias'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,9 +45,10 @@ class AttachDocument extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'model' => 'Model',
-            'docs_id' => 'Docs ID',
-            'name' => 'Name',
+            'item_id' => 'Docs ID',
             'file_name' => 'File Name',
+            'file_path' => 'path',
+            'url_alias' => 'alias',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

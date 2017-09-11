@@ -1,34 +1,51 @@
 <?php
 namespace deadly299\attachdocument\widgets;
 
+use deadly299\attachdocument\models\AttachDocument;
 use yii;
-use deadly299\attachdocument\models\Document;
 
 
-class AttachDocument extends \yii\base\Widget
+class AddDocument extends \yii\base\Widget
 {
     public $model = null;
+    public $row = null;
+    public $uploadsPath = '';
+    public $allowExtensions = ['doc', 'docx', 'pdf'];
+    public $inputName = 'documetFiles';
+    private $doResetImages = true;
 
     public function init()
     {
-        parent::init();
+        if (empty($this->uploadsPath)) {
+            $this->uploadsPath = yii::$app->getModule('attachdocument')->documentsStorePath;
+        }
 
     }
 
     public function run()
     {
-        $model = $this->model;
-//        $documents = Documents::find()->where(['model' => $model::className(), 'item_id' => $this->model->id])->all();
-        $documents = Documents::find()->all();
 
-        foreach ($documents as $document) {
-            $this->row .= $this->_row($document);
-        }
+        $model = $this->model;
+
+        $documents = AttachDocument::find()->where([
+            'model' => substr($model::className(), strrpos($model::className(), '\\') + 1),
+            'item_id' => $this->model->id
+        ])->all();
+
+        $this->row .= $this->_row($documents, $model);
+
+
+        return $this->row;
     }
 
-    private function _row($document)
+    public function getRow()
     {
-        return $this->render('_item', ['document' => $document]);
+        return $this->row;
+    }
+
+    private function _row($documents, $model)
+    {
+        return $this->render('_item', ['documents' => $documents, 'model' => $model]);
     }
 
 }
