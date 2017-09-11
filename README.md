@@ -19,6 +19,9 @@ or add
 "deadly299/yii2-attachdocument": "*"
 ```
 
+php yii migrate --migrationPath=vendor/deadly299/yii2-attachdocument/migrations
+
+
 to the require section of your `composer.json` file.
 
 
