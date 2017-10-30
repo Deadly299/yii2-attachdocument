@@ -10,7 +10,7 @@ use deadly299\attachdocument\models\AttachDocument;
  * Default controller for the `document-upload` module
  */
 
-class DefaultController extends Controller
+class DocumentController extends Controller
 {
     public function actionRemoveFile()
     {
@@ -37,6 +37,22 @@ class DefaultController extends Controller
         $model = AttachDocument::findOne($dataPost['id']);
         $model->url_alias = $dataPost['name'];
         $model->save();
+
+    }
+
+    public function actionDownload($hash)
+    {
+        if(!empty($id)) {
+            $ranks = AttachDocument::findOne($hash);
+            if(!empty($ranks)) {
+                $path = yii::$app->getModule('attachdocument')->documentsStorePath;
+                if(file_exists($path. '/'. $ranks->file_path)){
+                    return \Yii::$app->response->sendFile($path, $ranks->name.'.'. substr(strrchr($ranks->file_name, '.'), 1));
+                }else{
+                    throw new NotFoundHttpException('Такого файла не существует ');
+                }
+            }
+        }
 
     }
 

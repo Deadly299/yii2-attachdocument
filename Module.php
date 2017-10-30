@@ -7,8 +7,9 @@ namespace deadly299\attachdocument;
  */
 class Module extends \yii\base\Module
 {
-    public $documentsStorePath = '@app/web/documents/store';
-    public $pictureDocumentPath = '@app/web/images';
+    public $documentsStorePath = '@webroot/documents/store';
+    public $pictureDocumentPath = '@webroot/images';
+    public $iconDocumentPath;
 
     /**
      * @inheritdoc
