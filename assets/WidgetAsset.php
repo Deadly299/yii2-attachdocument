@@ -11,7 +11,7 @@ class WidgetAsset extends AssetBundle
     ];
 
     public $js = [
-        'js/scripts.js',
+        'js/attach.document.js',
     ];
     
     public $css = [

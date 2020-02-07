@@ -20,7 +20,9 @@ class m170908_105634_create_table_attach_document extends Migration
                 'model' => Schema::TYPE_STRING . "(255)",
                 'item_id' => Schema::TYPE_INTEGER . "(11)",
                 'url_alias' => Schema::TYPE_STRING . "(225) NOT NULL",
+                'file_path' => Schema::TYPE_STRING . "(250) NOT NULL",
                 'file_name' => Schema::TYPE_STRING . "(250) NOT NULL",
+                'extension' => Schema::TYPE_STRING . "(10) NOT NULL",
                 'created_at' => Schema::TYPE_INTEGER . "(11)",
                 'updated_at' => Schema::TYPE_INTEGER . "(11)",
             ], $tableOptions);

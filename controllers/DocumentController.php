@@ -12,14 +12,13 @@ use deadly299\attachdocument\models\AttachDocument;
 
 class DocumentController extends Controller
 {
-    public function actionRemoveFile()
-    {
-        $dataPost = Yii::$app->request->post();
 
-        $model = AttachDocument::findOne($dataPost['id']);
+    public function actionRemoveFile($id)
+    {
+        $model = AttachDocument::findOne($id);
         if(!empty($model)) {
 
-            $storePath = yii::$app->getModule('attachdocument')->documentsStorePath;
+            $storePath = yii::$app->getModule('attachDocument')->documentsStorePath;
             $fileToRemove = $storePath . DIRECTORY_SEPARATOR . $model->file_path;
             print_r($fileToRemove);
             if (preg_match('@\.@', $fileToRemove) and is_file($fileToRemove)) {
@@ -42,12 +41,12 @@ class DocumentController extends Controller
 
     public function actionDownload($hash)
     {
-        if(!empty($id)) {
-            $ranks = AttachDocument::findOne($hash);
+        if(!empty($hash)) {
+            $ranks = AttachDocument::findOne(['url_alias' => $hash]);
             if(!empty($ranks)) {
-                $path = yii::$app->getModule('attachdocument')->documentsStorePath;
+                $path = yii::$app->getModule('attachDocument')->documentsStorePath;
                 if(file_exists($path. '/'. $ranks->file_path)){
-                    return \Yii::$app->response->sendFile($path, $ranks->name.'.'. substr(strrchr($ranks->file_name, '.'), 1));
+                    return \Yii::$app->response->sendFile($path . '/'. $ranks->file_path, $ranks->file_path.'.'. substr(strrchr($ranks->file_name, '.'), 1));
                 }else{
                     throw new NotFoundHttpException('Такого файла не существует ');
                 }
