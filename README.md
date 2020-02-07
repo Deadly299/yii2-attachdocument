@@ -31,4 +31,4 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \deadly299\attachdocument\ListDocument::widget(); ?>```
+<?= \deadly299\attachdocument\widgets\UploadFiles::widget(['model' => $model, 'dataOptionsLink' => ['data-fancybox' => 'single']]) ?>
